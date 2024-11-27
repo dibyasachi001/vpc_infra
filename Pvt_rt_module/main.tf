@@ -9,7 +9,7 @@ resource "aws_route_table" "private_route_table" {
 
 #Private Route Table Association with Private Subnet
 resource "aws_route_table_association" "private_route_table_association" {
-  for_each = { for idx, subnet in var.subnetids : idx => subnet }
+  for_each = { for subnet, subnet in var.subnetids : subnet => subnet }
   # for_each       = {for subnet in var.subnetids : subnet => subnet}
   # for_each = toset(var.subnetids)
   subnet_id      = each.value
