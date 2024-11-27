@@ -14,7 +14,7 @@ resource "aws_route_table" "public_route_table" {
 
 #Public Route Table Association with Public Subnet
 resource "aws_route_table_association" "public_route_table_association" {
-  for_each = { for subnet, subnet in var.subnetids : subnet => subnet }
+  for_each = tomap({ for idx, subnet in var.subnetids : idx => subnet })
   # for_each = {for subnet in var.subnetids : subnet => subnet}
   # for_each = toset(var.subnetids)
   subnet_id = each.value
